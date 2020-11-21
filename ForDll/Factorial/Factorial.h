@@ -1,5 +1,5 @@
 #pragma once
-#include "../Calculator/PostfixOperation.h"
+#include "../../Calculator/PostfixOperation.h"
 
 class Factorial : public PostfixOperation
 {

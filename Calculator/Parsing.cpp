@@ -2,10 +2,10 @@
 
 void Calculator::Split(void) //dividing the input string into logical units
 {
-    unsigned int start = 0;
+    size_t start = 0;
     std::string separator = " ";
 
-    unsigned int end = expression.find(separator);
+    size_t end = expression.find(separator);
 
     while (end != std::string::npos)
     {
@@ -40,7 +40,7 @@ BasicOperation* Calculator::GetOperation(std::string part) //returns the corresp
     return nullptr;
 }
 
-bool Calculator::IsCorrect() //checking that the given line has the same number of '(' and ')'
+bool Calculator::IsCorrect(void) //checking that the given line has the same number of '(' and ')'
 {
     unsigned int countOpening = 0, countClosing = 0;
 

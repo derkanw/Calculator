@@ -1,5 +1,5 @@
 #pragma once
-#include "../Calculator/PrefixOperation.h"
+#include "../../Calculator/PrefixOperation.h"
 
 class Logarithm : public PrefixOperation
 {

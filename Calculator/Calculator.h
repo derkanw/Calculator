@@ -23,7 +23,7 @@ private:
     double StackMachine(void); //calculating the result of the entered expression in the reverse polish notation algorithm
 
     bool IsDigit(std::string part); //checking that the logical unit of the expression is an integer or decimal number
-    bool IsCorrect(); //checking that the given line has the same number of '(' and ')'
+    bool IsCorrect(void); //checking that the given line has the same number of '(' and ')'
     bool IsCorrectType(std::string part, OperationType type); //checking if the type of the operation matches the given type
     bool IsHigherPriority(std::string part1, std::string part2); //checking that the first operation has a higher priority
     bool HasOpeningBracket(void); //checking the correct position of the brackets

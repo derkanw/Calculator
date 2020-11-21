@@ -1,5 +1,5 @@
 #pragma once
-#include "../Calculator/BinaryOperation.h"
+#include "../../Calculator/BinaryOperation.h"
 
 class Power : public BinaryOperation
 {
