@@ -3,7 +3,7 @@
 #include <limits.h>
 #include "Sinus.h"
 
-Sinus::Sinus() : PrefixOperation()
+Sinus::Sinus() : BasicOperation(OperationType::Prefix)
 {
     name = "sin";
 }

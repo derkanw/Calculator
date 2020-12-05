@@ -1,7 +1,7 @@
 #pragma once
-#include "../../Calculator/PrefixOperation.h"
+#include "../../Calculator/BasicOperation.h"
 
-class Exponent : public PrefixOperation
+class Exponent : public BasicOperation
 {
 public:
     Exponent();

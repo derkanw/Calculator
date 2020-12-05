@@ -1,7 +1,7 @@
 #pragma once
-#include "../../Calculator/BinaryOperation.h"
+#include "../../Calculator/BasicOperation.h"
 
-class Addition : public BinaryOperation
+class Addition : public BasicOperation
 {
 public:
     Addition();

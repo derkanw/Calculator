@@ -8,16 +8,20 @@ void Calculator::LoadLibraries() //loading operations from dll and message about
 
     std::cout << "Operations are available to you:" << std::endl;
 
-    for (auto dll : std::filesystem::directory_iterator(dllDirectory))
-    {
-        HMODULE library = LoadLibraryA(dll.path().string().c_str());
-        libraries.push_back(library);
+    if (std::filesystem::exists(dllDirectory))
+        for (auto dll : std::filesystem::directory_iterator(dllDirectory))
+        {
+            HMODULE library = LoadLibraryA(dll.path().string().c_str());
+            libraries.push_back(library);
 
-        Loader loader = (Loader)GetProcAddress(library, "Load");
-        BasicOperation* operation = loader();
-        std::cout << operation->GetName() << "; ";
-        operations.push_back(operation);
-    }
+            Loader loader = (Loader)GetProcAddress(library, "Load");
+            if (GetLastError() != 0)
+                return;
+
+            BasicOperation* operation = loader();
+            std::cout << operation->GetName() << "; ";
+            operations.push_back(operation);
+        }
 
     std::cout << "\nSeparate each structure with a space, please!\n" << std::endl;
 }

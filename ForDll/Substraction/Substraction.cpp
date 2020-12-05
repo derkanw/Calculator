@@ -3,7 +3,7 @@
 #include <limits.h>
 #include "Substraction.h"
 
-Substraction::Substraction() : BinaryOperation()
+Substraction::Substraction() : BasicOperation(OperationType::Binary)
 {
     name = "-";
     priority = Priority::Low;

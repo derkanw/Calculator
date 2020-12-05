@@ -3,7 +3,7 @@
 #include <limits.h>
 #include "Addition.h"
 
-Addition::Addition() : BinaryOperation()
+Addition::Addition() : BasicOperation(OperationType::Binary)
 {
     name = "+";
     priority = Priority::Low;

@@ -3,7 +3,7 @@
 #include <limits.h>
 #include "Factorial.h"
 
-Factorial::Factorial() : PostfixOperation()
+Factorial::Factorial() : BasicOperation(OperationType::Postfix)
 {
     name = "!";
 }

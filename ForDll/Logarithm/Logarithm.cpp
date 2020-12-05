@@ -3,7 +3,7 @@
 #include <limits.h>
 #include "Logarithm.h"
 
-Logarithm::Logarithm() : PrefixOperation()
+Logarithm::Logarithm() : BasicOperation(OperationType::Prefix)
 {
     name = "ln";
 }

@@ -1,7 +1,7 @@
 #pragma once
-#include "../../Calculator/PostfixOperation.h"
+#include "../../Calculator/BasicOperation.h"
 
-class Factorial : public PostfixOperation
+class Factorial : public BasicOperation
 {
 public:
     Factorial();

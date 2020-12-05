@@ -3,7 +3,7 @@
 #include <limits.h>
 #include "Division.h"
 
-Division::Division() : BinaryOperation()
+Division::Division() : BasicOperation(OperationType::Binary)
 {
     name = "/";
     priority = Priority::Medium;

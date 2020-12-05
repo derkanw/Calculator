@@ -77,6 +77,80 @@ bool Calculator::HasOpeningBracket(void) //checking the correct position of the 
         return false;
 }
 
+bool Calculator::DigitOrPostfix(std::string part) //numbers and postfix operations are added directly to the reverse polish notation
+{
+    if (IsDigit(part) || IsCorrectType(part, OperationType::Postfix))
+    {
+        notation.push_back(part);
+        return true;
+    }
+    return false;
+}
+
+bool Calculator::LBracketOrPrefix(std::string part) //left brackets and prefix operations are added immediately to the stack entry
+{
+    if (part == "(" || IsCorrectType(part, OperationType::Prefix))
+    {
+        stack.push_back(part);
+        return true;
+    }
+    return false;
+}
+
+bool Calculator::RBracket(std::string part) //when a right bracket appears, all stack elements up to the left bracket are unloaded
+{
+    if (part == ")")
+    {
+        if (!HasOpeningBracket())
+        {
+            std::cout << "Syntax error" << std::endl;
+            return true;
+        }
+
+        while (!stack.empty() && stack.back() != "(")
+        {
+            notation.push_back(stack.back());
+            stack.pop_back();
+        }
+
+        if (!stack.empty())
+            stack.pop_back();
+        return true;
+    }
+    return false;
+}
+
+bool Calculator::Binary(std::string part) //binary operations are written according to the priority of the operations
+{
+    if (IsCorrectType(part, OperationType::Binary))
+    {
+        if (stack.empty())
+        {
+            stack.push_back(part);
+            return true;
+        }
+
+        while (!stack.empty() && (IsCorrectType(stack.back(), OperationType::Prefix) || IsHigherPriority(stack.back(), part)))
+        {
+            notation.push_back(stack.back());
+            stack.pop_back();
+        }
+        stack.push_back(part);
+        return true;
+    }
+    return false;
+}
+
+void Calculator::PushRemainder(void) //writing the remaining elements of the stack to the reverse polish notation
+{
+    size_t size = stack.size();
+    for (unsigned int i = 0; i < size; i++)
+    {
+        notation.push_back(stack.back());
+        stack.pop_back();
+    }
+}
+
 void Calculator::PolishNotation(void) //converting the input string according to the reverse polish notation algorithm
 {
     if (expression.empty() || operations.empty())
@@ -86,67 +160,13 @@ void Calculator::PolishNotation(void) //converting the input string according to
     }
 
     for (std::string part : parts)
-    {
-        if (IsDigit(part) || IsCorrectType(part, OperationType::Postfix)) //is digit or postfix operation
+        if (!(DigitOrPostfix(part) || LBracketOrPrefix(part) || RBracket(part) || Binary(part)))
         {
-            notation.push_back(part);
-            continue;
+            std::cout << "Invalid operation" << std::endl;
+            return;
         }
 
-        if (part == "(" || IsCorrectType(part, OperationType::Prefix)) //is prefix operation or '('
-        {
-            stack.push_back(part);
-            continue;
-        }
-
-        if (part == ")") //is ')'
-        {
-            if (!HasOpeningBracket())
-            {
-                std::cout << "Syntax error" << std::endl;
-                return;
-            }
-
-            while (!stack.empty() && stack.back() != "(")
-            {
-                notation.push_back(stack.back());
-                stack.pop_back();
-            }
-
-            if (!stack.empty())
-                stack.pop_back();
-
-            continue;
-        }
-
-        if (IsCorrectType(part, OperationType::Binary)) //is binary operation
-        {
-            if (stack.empty())
-            {
-                stack.push_back(part);
-                continue;
-            }
-
-            while (!stack.empty() && (IsCorrectType(stack.back(), OperationType::Prefix) || IsHigherPriority(stack.back(), part)))
-            {
-                notation.push_back(stack.back());
-                stack.pop_back();
-            }
-            stack.push_back(part);
-
-            continue;
-        }
-
-        std::cout << "Invalid operation" << std::endl;
-        return;
-    }
-
-    unsigned int size = stack.size();
-    for (unsigned int i = 0; i < size; i++)
-    {
-        notation.push_back(stack.back());
-        stack.pop_back();
-    }
+    PushRemainder();
 }
 
 double Calculator::StackMachine(void) //calculating the result of the entered expression in the reverse polish notation algorithm
@@ -158,7 +178,7 @@ double Calculator::StackMachine(void) //calculating the result of the entered ex
         else
         {
             double result;
-            unsigned int maxIndex = resultStack.size() - 1;
+            size_t maxIndex = resultStack.size() - 1;
             BasicOperation* operation = GetOperation(part);
 
             if (operation->GetType() == OperationType::Binary)

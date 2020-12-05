@@ -1,7 +1,7 @@
 #pragma once
-#include "../../Calculator/PrefixOperation.h"
+#include "../../Calculator/BasicOperation.h"
 
-class Sinus : public PrefixOperation
+class Sinus : public BasicOperation
 {
 public:
     Sinus();

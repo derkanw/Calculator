@@ -138,11 +138,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BasicOperation.h" />
-    <ClInclude Include="BinaryOperation.h" />
     <ClInclude Include="Calculator.h" />
     <ClInclude Include="Enums.h" />
-    <ClInclude Include="PostfixOperation.h" />
-    <ClInclude Include="PrefixOperation.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

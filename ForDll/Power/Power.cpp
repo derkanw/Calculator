@@ -4,7 +4,7 @@
 #include <cmath>
 #include "Power.h"
 
-Power::Power() : BinaryOperation()
+Power::Power() : BasicOperation(OperationType::Binary)
 {
     name = "^";
     priority = Priority::High;

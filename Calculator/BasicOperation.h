@@ -11,7 +11,10 @@ protected:
     Priority priority; //operation priority: high, medium, low
 
 public:
-    BasicOperation() = default;
+    BasicOperation(OperationType operationType)
+    {
+        type = operationType;
+    }
 
     std::string GetName();
     OperationType GetType();

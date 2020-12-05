@@ -3,7 +3,7 @@
 #include <limits.h>
 #include "Exponent.h"
 
-Exponent::Exponent() : PrefixOperation()
+Exponent::Exponent() : BasicOperation(OperationType::Prefix)
 {
     name = "exp";
 }

@@ -3,7 +3,7 @@
 #include <limits.h>
 #include "Multiplication.h"
 
-Multiplication::Multiplication() : BinaryOperation()
+Multiplication::Multiplication() : BasicOperation(OperationType::Binary)
 {
     name = "*";
     priority = Priority::Medium;

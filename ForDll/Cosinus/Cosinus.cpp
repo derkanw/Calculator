@@ -3,7 +3,7 @@
 #include <limits.h>
 #include "Cosinus.h"
 
-Cosinus::Cosinus() : PrefixOperation()
+Cosinus::Cosinus() : BasicOperation(OperationType::Prefix)
 {
     name = "cos";
 }
